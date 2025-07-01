@@ -43,11 +43,18 @@ async function checkWebXRSupport() {
         showError("WebXR не поддерживается в вашем браузере. Попробуйте Chrome на Android или Safari на iOS 15+.");
         return;
     }
-    
+
     try {
         const isSupported = await navigator.xr.isSessionSupported('immersive-ar');
         if (!isSupported) {
             showError("AR режим не поддерживается на этом устройстве.");
+            return;
+        }
+
+        // Check supported reference spaces
+        const supportedSpaces = await navigator.xr.isReferenceSpaceTypeSupported('local');
+        if (!supportedSpaces) {
+            showError("Device doesn't support required reference space");
         }
     } catch (error) {
         showError("Ошибка проверки поддержки AR: " + error.message);
@@ -217,12 +224,19 @@ function render(timestamp, frame) {
     if (frame) {
         const referenceSpace = renderer.xr.getReferenceSpace();
         const session = renderer.xr.getSession();
-        
-        if (hitTestSourceRequested === false) {
-            session.requestReferenceSpace('viewer').then((referenceSpace) => {
-                session.requestHitTestSource({ space: referenceSpace }).then((source) => {
-                    hitTestSource = source;
-                });
+
+        if (hitTestSourceRequested === false && session) {
+            session.requestReferenceSpace('local').then((referenceSpace) => {
+                return session.requestHitTestSource({ space: referenceSpace });
+            }).then((source) => {
+                hitTestSource = source;
+            }).catch((error) => {
+                console.error("Error setting up hit test:", error);
+                // Fallback to placing the clock in front of the user
+                if (clockModel) {
+                    clockModel.position.set(0, 0, -1);
+                    clockModel.visible = true;
+                }
             });
             hitTestSourceRequested = true;
         }
