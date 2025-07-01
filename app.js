@@ -1,5 +1,3 @@
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-
 let scene, camera, renderer, clockModel;
 let clockScale = 0.5;
 let arSession = null;
