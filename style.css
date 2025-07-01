@@ -1,0 +1,114 @@
+/* Базовые стили для AR-приложения */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    user-select: none;
+}
+
+/* Контейнер для элементов управления */
+#clock-container {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопок */
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    min-width: 120px;
+}
+
+/* Эффекты при наведении на кнопки */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Эффект при нажатии на кнопки */
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    #clock-container {
+        bottom: 15px;
+        padding: 0 15px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 0 5px;
+        min-width: 100px;
+    }
+}
+
+/* Стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    #clock-container {
+        bottom: 10px;
+        padding: 0 10px;
+    }
+    
+    button {
+        display: block;
+        margin: 5px auto;
+        width: 80%;
+        max-width: 200px;
+    }
+}
+
+/* Дополнительные стили для улучшения UX */
+a-scene {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Стили для загрузки */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 18px;
+    z-index: 999;
+}
+
+/* Анимация для плавного появления элементов */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#clock-container {
+    animation: fadeIn 0.5s ease-out;
+}
