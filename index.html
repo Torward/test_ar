@@ -14,7 +14,7 @@
     <a-scene embedded arjs="sourceType: webcam; detectionMode: mono; maxDetectionRate: 60;">
         <a-marker preset="hiro">
         <!-- Часы будут добавляться динамически через JS -->
-            <a-entity id="clock" position="0 0 0" scale="1 1 1"></a-entity>
+            <a-entity id="clock" position="center" scale="1 1 1"></a-entity>
         </a-marker>
         <!-- Маркер плоскости (стена/пол) -->
         <a-entity cursor="rayOrigin: mouse"></a-entity>
