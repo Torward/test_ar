@@ -1,8 +1,11 @@
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+
 let scene, camera, renderer, clockModel;
 let clockScale = 0.5;
 let arSession = null;
 let hitTestSource = null;
 let hitTestSourceRequested = false;
+
 
 // Инициализация сцены
 function init() {
@@ -107,40 +110,39 @@ function createClock() {
 }
 
 // Создание цифр на циферблате
-function createClockNumbers(clockGroup) {
-    new THREE.FontLoader();
-    
+async function createClockNumbers(clockGroup) {
+
     // Создаем простые метки вместо текста для лучшей совместимости
     for (let i = 1; i <= 12; i++) {
         const angle = (i * 30 - 90) * Math.PI / 180;
         const radius = 0.38;
-        
+
         // Создаем метку для каждого часа
         const markGeometry = new THREE.BoxGeometry(0.02, 0.06, 0.01);
-        const markMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+        const markMaterial = new THREE.MeshBasicMaterial({color: 0x333333});
         const mark = new THREE.Mesh(markGeometry, markMaterial);
-        
+
         mark.position.x = Math.cos(angle) * radius;
         mark.position.z = Math.sin(angle) * radius;
         mark.position.y = 0.001;
         mark.rotation.x = -Math.PI / 2;
         mark.rotation.z = angle + Math.PI / 2;
-        
+
         clockGroup.add(mark);
-        
+
         // Добавляем минутные метки
         if (i % 3 !== 0) { // Не добавляем на 12, 3, 6, 9
             for (let j = 1; j <= 4; j++) {
                 const minuteAngle = ((i - 1) * 30 + j * 6 - 90) * Math.PI / 180;
                 const minuteMarkGeometry = new THREE.BoxGeometry(0.01, 0.03, 0.005);
                 const minuteMark = new THREE.Mesh(minuteMarkGeometry, markMaterial);
-                
+
                 minuteMark.position.x = Math.cos(minuteAngle) * (radius + 0.05);
                 minuteMark.position.z = Math.sin(minuteAngle) * (radius + 0.05);
                 minuteMark.position.y = 0.001;
                 minuteMark.rotation.x = -Math.PI / 2;
                 minuteMark.rotation.z = minuteAngle + Math.PI / 2;
-                
+
                 clockGroup.add(minuteMark);
             }
         }
