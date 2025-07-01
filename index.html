@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- AR-сцена -->
-    <a-scene embedded arjs="sourceType: webcam; detectionMode: mono; maxDetectionRate: 60;">
+    <a-scene embedded arjs="sourceType: webcam; detectionMode: plane; maxDetectionRate: best;">
   
         <!-- Часы будут добавляться динамически через JS -->
             <a-entity id="clock" position="0 0 0" scale="1 1 1"></a-entity>
