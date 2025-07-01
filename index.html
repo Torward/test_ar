@@ -72,9 +72,12 @@
     <div id="error-message"></div>
 
     <!-- Подключаем Three.js и WebXR -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@2.0.3/build/webxr-polyfill.min.js"></script>
+    <script>
+        // Инициализируем WebXR полифилл
+        const polyfill = new WebXRPolyfill();
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
