@@ -108,7 +108,7 @@ function createClock() {
 
 // Создание цифр на циферблате
 function createClockNumbers(clockGroup) {
-    const loader = new THREE.FontLoader();
+    new THREE.FontLoader();
     
     // Создаем простые метки вместо текста для лучшей совместимости
     for (let i = 1; i <= 12; i++) {
